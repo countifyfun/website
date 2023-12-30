@@ -4,13 +4,15 @@ import Link from "next/link";
 export default function Navbar() {
   return (
     <nav className="mx-auto flex h-16 max-w-[90rem] items-center justify-between border-b border-neutral-800 px-6">
-      <Image
-        src="/logo.png"
-        alt="Countify Logo"
-        width={40}
-        height={40}
-        className="rounded-full"
-      />
+      <Link href="/" className="transition-all hover:opacity-80">
+        <Image
+          src="/logo.png"
+          alt="Countify Logo"
+          width={40}
+          height={40}
+          className="rounded-full"
+        />
+      </Link>
       <div className="flex items-center">
         <Link
           href="/servers"
