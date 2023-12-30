@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "clsx": "^2.1.0",
+    "highcharts": "^11.2.0",
+    "highcharts-react-official": "^3.2.1",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-odometerjs": "^3.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",

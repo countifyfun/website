@@ -1,10 +1,17 @@
-import Footer from "@/components/footer";
-import Navbar from "@/components/navbar";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
+import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
+import clsx from "clsx";
+import type { Metadata } from "next";
+
+import { Inter, Roboto } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["700"],
+  variable: "--font-roboto",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={clsx(inter.className, roboto.variable)}>
         <Navbar />
         <main>{children}</main>
         <Footer />

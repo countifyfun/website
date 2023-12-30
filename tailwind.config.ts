@@ -38,6 +38,9 @@ const config: Config = {
           900: makePrimaryColor(24) as unknown as string,
         },
       },
+      fontFamily: {
+        roboto: ["var(--font-roboto)"],
+      },
     },
   },
   plugins: [tailwind3d],
