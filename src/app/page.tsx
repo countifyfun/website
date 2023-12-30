@@ -18,7 +18,7 @@ export default function Landing() {
           </div>
           <a
             href="/invite"
-            className="bg-yellow-500/40 border border-yellow-300 px-4 py-2 rounded-full hover:bg-yellow-500/50 transition-colors flex items-center gap-2"
+            className="bg-yellow-500/30 border border-yellow-300 px-4 py-2 rounded-full hover:bg-yellow-500/40 transition-colors flex items-center gap-1"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
