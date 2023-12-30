@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     template: "%s — Countify",
   },
   description: "Your dream Discord counting bot.",
+  themeColor: "#fde047",
   twitter: {
     card: "summary_large_image",
     creator: "@ToastedDev",
