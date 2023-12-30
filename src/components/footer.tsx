@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <footer
-      className="bg-neutral-900 mx-auto flex max-w-[90rem] justify-center py-12 text-gray-400 md:justify-start pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]"
+      className="mx-auto flex max-w-[90rem] justify-center bg-neutral-900 py-12 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] text-gray-400 md:justify-start"
       aria-labelledby="footer-heading"
     >
       <h2 id="footer-heading" className="sr-only">
@@ -11,7 +11,7 @@ export default function Footer() {
       </h2>
       <div>
         <a
-          className="flex items-center justify-center gap-2 hover:opacity-75 md:justify-normal md:w-fit"
+          className="flex items-center justify-center gap-2 hover:opacity-75 md:w-fit md:justify-normal"
           href="/"
         >
           <Image
@@ -21,7 +21,7 @@ export default function Footer() {
             height={35}
             className="rounded-full"
           />
-          <h1 className="text-primary-600 text-2xl font-bold tracking-tight">
+          <h1 className="text-2xl font-bold tracking-tight text-primary-600">
             Countify
           </h1>
         </a>

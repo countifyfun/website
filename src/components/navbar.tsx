@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="h-16 max-w-[90rem] mx-auto flex items-center justify-between px-6 border-b border-neutral-800">
+    <nav className="mx-auto flex h-16 max-w-[90rem] items-center justify-between border-b border-neutral-800 px-6">
       <Image
         src="/logo.png"
         alt="Countify Logo"
@@ -14,7 +14,7 @@ export default function Navbar() {
       <div className="flex items-center">
         <Link
           href="https://docs.countify.fun"
-          className="hover:text-primary-600 transition-all p-2"
+          className="p-2 text-sm transition-all hover:text-primary-600"
         >
           Docs
         </Link>
