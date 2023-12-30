@@ -11,7 +11,7 @@ export default function Footer() {
       </h2>
       <div>
         <a
-          className="flex items-center justify-center gap-2 hover:opacity-75 md:w-fit md:justify-normal"
+          className="flex items-center justify-center gap-2 transition-all hover:opacity-75 md:w-fit md:justify-normal"
           href="/"
         >
           <Image
