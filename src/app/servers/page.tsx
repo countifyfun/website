@@ -1,6 +1,12 @@
 import { Server } from "@/types/server";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Servers",
+  description: "View all counting channels powered by Countify.",
+};
 
 export default async function Servers() {
   const res = await fetch("https://api.countify.fun/servers");
@@ -39,7 +45,9 @@ export default async function Servers() {
               <h1 className="text-3xl font-bold tracking-tighter">
                 {server.name}
               </h1>
-              <p className="text-sm text-neutral-500">Rank #{index + 1} • {server.id}</p>
+              <p className="text-sm text-neutral-500">
+                Rank #{index + 1} • {server.id}
+              </p>
             </div>
           </Link>
         ))}
