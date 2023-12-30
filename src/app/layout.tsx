@@ -3,7 +3,7 @@ import "./globals.css";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import clsx from "clsx";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 import { Inter, Roboto } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
     template: "%s — Countify",
   },
   description: "Your dream Discord counting bot.",
-  themeColor: "#fde047",
   twitter: {
     card: "summary_large_image",
     creator: "@ToastedDev",
@@ -42,6 +41,10 @@ export const metadata: Metadata = {
       { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
     ],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#fde047",
 };
 
 export default function RootLayout({
