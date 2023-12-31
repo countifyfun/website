@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   description: "View all counting channels powered by Countify.",
 };
 
+export const revalidate = 60
+
 export default async function Servers() {
   const res = await fetch("https://api.countify.fun/servers");
   const data: Server[] = await res.json();
