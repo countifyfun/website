@@ -5,6 +5,7 @@ import { graphOptions } from "@/utils/graph-options";
 import * as Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Odometer from "react-odometerjs";
 
@@ -29,7 +30,7 @@ export default function Counts({ server }: { server: Server }) {
   }, [server.id]);
 
   return (
-    <div className="mx-auto min-h-[calc(100vh-4rem)] max-w-4xl p-6">
+    <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-4xl flex-col gap-3 p-6">
       <div className="rounded-lg bg-neutral-900 p-4">
         <div className="flex flex-col items-center justify-center gap-2 text-center">
           {server.avatar ? (
@@ -54,10 +55,16 @@ export default function Counts({ server }: { server: Server }) {
         </div>
         <Odometer
           value={count}
-          className="font-roboto mt-1 w-full text-center text-5xl !leading-[1.1em] sm:text-6xl md:text-7xl"
+          className="mt-1 w-full text-center font-roboto text-5xl !leading-[1.1em] sm:text-6xl md:text-7xl"
         />
       </div>
-      <div className="mt-3 rounded-lg bg-neutral-900 p-4 py-8">
+      <Link
+        href={`/servers/${server.id}/leaderboard`}
+        className="rounded-lg bg-neutral-900 p-4 text-center transition-all hover:text-yellow-300 hover:opacity-75"
+      >
+        View Leaderboard
+      </Link>
+      <div className="rounded-lg bg-neutral-900 p-4 py-8">
         <HighchartsReact
           highcharts={Highcharts}
           options={graphOptions(server.name)}
