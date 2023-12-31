@@ -1,6 +1,7 @@
 import { Server } from "@/types/server";
 import { User } from "@/types/user";
 import clsx from "clsx";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -15,6 +16,20 @@ const sortNames = {
 
 const cfRatio = (counts: number, fails: number) =>
   parseInt(((counts / (counts + fails)) * 100).toFixed(2));
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Record<"id", string>;
+}): Promise<Metadata> => {
+  const res = await fetch(`https://api.countify.fun/servers/${params.id}`);
+  const data: Server = await res.json();
+
+  return {
+    title: `${data.name} Leaderboard`,
+    description: `View the leaderboard for ${data.name} directly in Countify!`,
+  };
+};
 
 export const revalidate = 60;
 
