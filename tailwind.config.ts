@@ -23,21 +23,6 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      colors: {
-        primary: {
-          50: makePrimaryColor(97) as unknown as string,
-          100: makePrimaryColor(94) as unknown as string,
-          200: makePrimaryColor(86) as unknown as string,
-          300: makePrimaryColor(77) as unknown as string,
-          400: makePrimaryColor(66) as unknown as string,
-          500: makePrimaryColor(50) as unknown as string,
-          600: makePrimaryColor(45) as unknown as string,
-          700: makePrimaryColor(39) as unknown as string,
-          750: makePrimaryColor(35) as unknown as string,
-          800: makePrimaryColor(32) as unknown as string,
-          900: makePrimaryColor(24) as unknown as string,
-        },
-      },
       fontFamily: {
         roboto: ["var(--font-roboto)"],
       },

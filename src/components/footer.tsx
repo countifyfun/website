@@ -21,7 +21,7 @@ export default function Footer() {
             height={35}
             className="rounded-full"
           />
-          <h1 className="text-2xl font-bold tracking-tight text-primary-600">
+          <h1 className="text-2xl font-bold tracking-tighter text-yellow-300">
             Countify
           </h1>
         </a>
@@ -29,14 +29,14 @@ export default function Footer() {
           © 2023{" "}
           <a
             href="https://github.com/countifyfun"
-            className="text-primary-600 underline decoration-from-font [text-underline-position:from-font]"
+            className="text-yellow-300 underline decoration-from-font [text-underline-position:from-font]"
           >
             Countify Labs
           </a>{" "}
           (a subdivision of{" "}
           <a
             href="https://youtube.com/@graphifystatistics"
-            className="text-primary-600 underline decoration-from-font [text-underline-position:from-font]"
+            className="text-yellow-300 underline decoration-from-font [text-underline-position:from-font]"
           >
             Graphify Studios
           </a>

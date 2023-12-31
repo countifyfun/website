@@ -1,10 +1,16 @@
+"use client";
+
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const pathname = usePathname();
+
   return (
-    <nav className="mx-auto flex h-16 max-w-[90rem] items-center justify-between border-b border-neutral-800 px-6">
-      <Link href="/" className="transition-all hover:opacity-80">
+    <nav className="mx-auto flex h-16 max-w-[90rem] items-center justify-between bg-neutral-900 px-6">
+      <Link href="/" className="transition-all hover:opacity-75">
         <Image
           src="/logo.png"
           alt="Countify Logo"
@@ -16,13 +22,18 @@ export default function Navbar() {
       <div className="flex items-center">
         <Link
           href="/servers"
-          className="p-2 text-sm transition-all hover:text-primary-600"
+          className={clsx(
+            "p-2 text-sm font-medium transition-all",
+            pathname.startsWith("/servers")
+              ? "text-yellow-300"
+              : "hover:text-yellow-300",
+          )}
         >
           Servers
         </Link>
         <Link
           href="https://docs.countify.fun"
-          className="p-2 text-sm transition-all hover:text-primary-600"
+          className="p-2 text-sm font-medium transition-all hover:text-yellow-300"
         >
           Docs
         </Link>
@@ -30,7 +41,7 @@ export default function Navbar() {
           href="https://github.com/countifyfun/bot"
           target="_blank"
           rel="noreferrer"
-          className="p-2 transition-all hover:text-primary-600"
+          className="p-2 transition-all hover:text-yellow-300"
         >
           <svg width="24" height="24" fill="currentColor" viewBox="3 3 18 18">
             <title>GitHub</title>
@@ -41,7 +52,7 @@ export default function Navbar() {
         </a>
         <a
           href="/invite"
-          className="p-2 transition-all hover:text-primary-600"
+          className="p-2 transition-all hover:text-yellow-300"
           target="_blank"
         >
           <svg
