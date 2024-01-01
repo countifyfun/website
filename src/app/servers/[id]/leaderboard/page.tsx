@@ -38,20 +38,33 @@ export default async function Leaderboard({
   searchParams,
 }: {
   params: Record<"id", string>;
-  searchParams: Record<"sort", string | string[] | undefined>;
+  searchParams: Record<"sort" | "page", string | string[] | undefined>;
 }) {
   const sort: Sort =
     ((typeof searchParams.sort === "object"
       ? searchParams.sort[0]
       : searchParams.sort) as Sort) ?? "cf_ratio";
+  const page = parseInt(
+    (typeof searchParams.page === "object"
+      ? searchParams.page[0]
+      : searchParams.page) ?? "1",
+  );
 
   const res = await fetch(`https://api.countify.fun/servers/${params.id}`);
   const data: Server = await res.json();
   if (res.status === 404 || !data) return notFound();
 
-  const users: User[] = await fetch(
-    `https://api.countify.fun/servers/${params.id}/users?sort=${sort}`,
-  ).then((res) => res.json());
+  const { users, totalPages }: { users: User[]; totalPages: number } =
+    await fetch(
+      `https://api.countify.fun/servers/${params.id}/users?sort=${sort}`,
+    ).then((res) => res.json());
+
+  function createQueryString(name: string, value: string) {
+    const params = new URLSearchParams(searchParams as Record<string, string>);
+    params.set(name, value);
+
+    return params.toString();
+  }
 
   return (
     <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-4xl flex-col gap-2 p-6">
@@ -81,7 +94,7 @@ export default async function Leaderboard({
             {sorts.map((s) => (
               <Link
                 key={s}
-                href={`?sort=${s}`}
+                href={`?${createQueryString("sort", s)}`}
                 className={clsx(
                   "text-md font-medium transition-all",
                   s === sort ? "text-yellow-300" : "hover:text-yellow-300",
@@ -127,6 +140,26 @@ export default async function Leaderboard({
           </li>
         ))}
       </ul>
+      {totalPages > 1 ? (
+        <div className="flex items-center justify-center gap-2">
+          {Array(totalPages)
+            .fill("")
+            .map((_, index) => (
+              <Link
+                key={index}
+                href={`?${createQueryString("page", (index + 1).toString())}`}
+                className={clsx(
+                  "font-medium transition-all",
+                  page === index + 1
+                    ? "text-yellow-300"
+                    : "hover:text-yellow-300",
+                )}
+              >
+                {index + 1}
+              </Link>
+            ))}
+        </div>
+      ) : null}
     </div>
   );
 }
