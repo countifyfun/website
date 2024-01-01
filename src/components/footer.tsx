@@ -26,7 +26,7 @@ export default function Footer() {
           </h1>
         </a>
         <p className="mt-4 text-xs text-neutral-500">
-          © 2023{" "}
+          © {new Date().getFullYear()}{" "}
           <a
             href="https://github.com/countifyfun"
             className="text-yellow-300 underline decoration-from-font [text-underline-position:from-font]"
