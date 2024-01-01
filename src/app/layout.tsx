@@ -53,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ colorScheme: "dark" }}>
       <body className={clsx(inter.className, roboto.variable)}>
         <Navbar />
         <main>{children}</main>
