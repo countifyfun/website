@@ -1,14 +1,6 @@
+import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 import tailwind3d from "tailwindcss-3d";
-import colors from "tailwindcss/colors";
-
-const makePrimaryColor =
-  (l: number) =>
-  ({ opacityValue }: { opacityValue: number }) => {
-    return (
-      `hsl(53deg 100% ${l}%` + (opacityValue ? ` / ${opacityValue})` : ")")
-    );
-  };
 
 const config: Config = {
   content: [
@@ -28,6 +20,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [tailwind3d],
+  plugins: [tailwind3d, typography],
 };
 export default config;

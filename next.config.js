@@ -1,3 +1,5 @@
+const withMDX = require("@next/mdx")();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   redirects: async () => [
@@ -11,7 +13,7 @@ const nextConfig = {
       source: "/discord",
       destination: "https://discord.com/invite/8Bum6ANyQ7",
       permanent: false,
-    }
+    },
   ],
   images: {
     remotePatterns: [
@@ -35,6 +37,7 @@ const nextConfig = {
       },
     ],
   },
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
 };
 
-module.exports = nextConfig;
+module.exports = withMDX(nextConfig);
