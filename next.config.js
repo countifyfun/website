@@ -7,6 +7,11 @@ const nextConfig = {
         "https://discord.com/api/oauth2/authorize?client_id=1190299944062570627&permissions=26640&scope=bot%20applications.commands",
       permanent: false,
     },
+    {
+      source: "/discord",
+      destination: "https://discord.com/invite/8Bum6ANyQ7",
+      permanent: false,
+    }
   ],
   images: {
     remotePatterns: [
