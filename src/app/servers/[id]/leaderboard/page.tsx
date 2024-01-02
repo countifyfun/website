@@ -1,13 +1,10 @@
-import { Server } from "@/types/server";
-import { User } from "@/types/user";
+import { UserSort, getServer, getServerUsers, userSorts } from "@/utils/api";
 import clsx from "clsx";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-const sorts = ["counts", "fails", "cf_ratio"] as const;
-type Sort = (typeof sorts)[number];
 const sortNames = {
   counts: "Counts",
   fails: "Fails",
@@ -22,12 +19,11 @@ export const generateMetadata = async ({
 }: {
   params: Record<"id", string>;
 }): Promise<Metadata> => {
-  const res = await fetch(`https://api.countify.fun/servers/${params.id}`);
-  const data: Server = await res.json();
+  const data = await getServer(params.id);
 
   return {
-    title: `${data.name} Leaderboard`,
-    description: `View the leaderboard for ${data.name} directly in Countify!`,
+    title: `${data?.name} Leaderboard`,
+    description: `View the leaderboard for ${data?.name} directly in Countify!`,
   };
 };
 
@@ -40,24 +36,20 @@ export default async function Leaderboard({
   params: Record<"id", string>;
   searchParams: Record<"sort" | "page", string | string[] | undefined>;
 }) {
-  const sort: Sort =
+  const sort: UserSort =
     ((typeof searchParams.sort === "object"
       ? searchParams.sort[0]
-      : searchParams.sort) as Sort) ?? "cf_ratio";
+      : searchParams.sort) as UserSort) ?? "cf_ratio";
   const page = parseInt(
     (typeof searchParams.page === "object"
       ? searchParams.page[0]
       : searchParams.page) ?? "1",
   );
 
-  const res = await fetch(`https://api.countify.fun/servers/${params.id}`);
-  const data: Server = await res.json();
-  if (res.status === 404 || !data) return notFound();
+  const data = await getServer(params.id);
+  if (!data) return notFound();
 
-  const { users, totalPages }: { users: User[]; totalPages: number } =
-    await fetch(
-      `https://api.countify.fun/servers/${params.id}/users?sort=${sort}`,
-    ).then((res) => res.json());
+  const { users, totalPages } = await getServerUsers(params.id, { sort, page });
 
   function createQueryString(name: string, value: string) {
     const params = new URLSearchParams(searchParams as Record<string, string>);
@@ -91,7 +83,7 @@ export default async function Leaderboard({
         <div className="text-right">
           <p className="text-sm text-neutral-500">Sort by</p>
           <div className="flex items-center gap-2">
-            {sorts.map((s) => (
+            {userSorts.map((s) => (
               <Link
                 key={s}
                 href={`?${createQueryString("sort", s)}`}

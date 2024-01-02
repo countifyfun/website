@@ -1,4 +1,4 @@
-import { Server } from "@/types/server";
+import { getServers } from "@/utils/api";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,11 +8,10 @@ export const metadata: Metadata = {
   description: "View all counting channels powered by Countify.",
 };
 
-export const revalidate = 60
+export const revalidate = 60;
 
 export default async function Servers() {
-  const res = await fetch("https://api.countify.fun/servers");
-  const data: Server[] = await res.json();
+  const data = await getServers();
 
   return (
     <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-[90rem] flex-col gap-2 p-6">

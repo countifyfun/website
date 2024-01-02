@@ -1,6 +1,6 @@
 "use client";
 
-import { Server } from "@/types/server";
+import type { Server } from "@/utils/api";
 import { graphOptions } from "@/utils/graph-options";
 import * as Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
