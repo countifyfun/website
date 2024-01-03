@@ -7,6 +7,40 @@ export interface Server {
   count: number;
 }
 
+export interface ServerWithData extends Server {
+  channels: {
+    id: string;
+    name: string;
+  }[];
+  categories: {
+    id: string;
+    name: string;
+    channels: {
+      id: string;
+      name: string;
+    }[];
+  }[];
+  channelId: string;
+  settings: {
+    oneByOne: boolean;
+    resetOnFail: boolean;
+    talking: boolean;
+    noDeletion: boolean;
+    pinMilestones: boolean;
+    unlisted: boolean;
+  };
+}
+
+export interface APIServer {
+  id: string;
+  name: string;
+  icon: string;
+  owner: boolean;
+  permissions: string;
+  features: string[];
+  botInGuild: boolean;
+}
+
 export interface User {
   id: string;
   name: string;
@@ -19,11 +53,38 @@ export interface User {
 export const userSorts = ["counts", "fails", "cf_ratio"] as const;
 export type UserSort = (typeof userSorts)[number];
 
-const fetchFromAPI = (url: string) => fetch(`${env.API_URL}${url}`);
+export const fetchFromAPI = (url: string, init?: RequestInit) =>
+  fetch(`${env.API_URL}${url}`, init);
 
 export const getServers = async (): Promise<Server[]> => {
   const res = await fetchFromAPI("/servers");
   return await res.json();
+};
+
+export const getServersForCurrentUser = async (
+  accessToken?: string,
+): Promise<APIServer[]> => {
+  const res = await fetchFromAPI("/dashboard/servers", {
+    headers: {
+      Authorization: accessToken ? `Bearer ${accessToken}` : (undefined as any),
+    },
+  });
+  return await res.json();
+};
+
+export const getServerForCurrentUser = async (
+  id: string,
+  accessToken?: string,
+): Promise<ServerWithData | undefined> => {
+  const res = await fetchFromAPI(`/dashboard/servers/${id}`, {
+    headers: {
+      Authorization: accessToken ? `Bearer ${accessToken}` : (undefined as any),
+    },
+  });
+  const data = await res.json();
+
+  if (res.status === 404 || !data) return undefined;
+  return data;
 };
 
 export const getServer = async (id: string): Promise<Server | undefined> => {

@@ -4,6 +4,8 @@ import { z } from "zod";
 export const env = createEnv({
   server: {
     API_URL: z.string().url(),
+    DISCORD_CLIENT_ID: z.string(),
+    DISCORD_CLIENT_SECRET: z.string(),
   },
 
   client: {},

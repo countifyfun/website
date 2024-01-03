@@ -2,6 +2,7 @@ import "./globals.css";
 
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
+import Toaster from "@/components/toaster";
 import clsx from "clsx";
 import type { Metadata, Viewport } from "next";
 
@@ -58,6 +59,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <Toaster />
       </body>
     </html>
   );
