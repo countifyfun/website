@@ -28,7 +28,22 @@ export const generateMetadata = async ({
 }: {
   params: Record<"id", string>;
 }): Promise<Metadata> => {
-  const data = await getServer(params.id);
+  const token = await getToken({
+    req: {
+      headers: Object.fromEntries(headers()),
+      cookies: Object.fromEntries(
+        cookies()
+          .getAll()
+          .map((c) => [c.name, c.value]),
+      ),
+    } as any,
+  });
+  if (!token) return {};
+
+  const data = await getServerForCurrentUser(
+    params.id,
+    token.access_token as string,
+  );
 
   return {
     title: `${data?.name} Dashboard`,
