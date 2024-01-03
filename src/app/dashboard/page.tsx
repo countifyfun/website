@@ -27,7 +27,7 @@ export default async function Dashboard() {
   const data = await getServersForCurrentUser(token.access_token as string);
 
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-[90rem] flex-col p-6">
+    <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-[90rem] flex-col gap-2 p-6">
       <div className="flex flex-col items-center justify-center gap-2 text-center">
         <h1 className="text-5xl font-bold tracking-tighter">Dashboard</h1>
         <p className="max-w-2xl text-neutral-400 [text-wrap:pretty]">
