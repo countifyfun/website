@@ -1,7 +1,14 @@
 import Highcharts, { Options } from "highcharts";
 import colors from "tailwindcss/colors";
 
-export const graphOptions = (name: string): Options => ({
+export const graphOptions = (
+  name: string,
+  options?: {
+    data?: [number, number][];
+    title?: string;
+    gains?: true;
+  },
+): Options => ({
   chart: {
     renderTo: "chart",
     type: "line",
@@ -10,7 +17,7 @@ export const graphOptions = (name: string): Options => ({
     animation: false,
   },
   title: {
-    text: "",
+    text: options?.title,
   },
   xAxis: {
     type: "datetime",
@@ -64,32 +71,67 @@ export const graphOptions = (name: string): Options => ({
         '<br><span style="color:black">\u25CF </span>' +
         // @ts-ignore
         this.points[0].series.name +
-        ": <b>" +
+        ": <b>";
+      if (options?.gains) {
         // @ts-ignore
-        Highcharts.numberFormat(this.y, 0);
-      if (dif < 0) {
+        if (this.y < 0) {
+          r +=
+            // @ts-ignore
+            '<span style="color:#ff0000;font-weight:bold;">' +
+            // @ts-ignore
+            Highcharts.numberFormat(this.y, 0) +
+            "</span>";
+        }
+        // @ts-ignore
+        else if (this.y === 0) {
+          // @ts-ignore
+          r += Highcharts.numberFormat(this.y, 0);
+        }
+        // @ts-ignore
+        else if (this.y > 0) {
+          r +=
+            // @ts-ignore
+            '<span style="color:#00bb00;font-weight:bold;">+' +
+            // @ts-ignore
+            Highcharts.numberFormat(this.y, 0) +
+            "</span>";
+        }
+      } else {
         r +=
-          '<span style="color:#ff0000;font-weight:bold;"> (' +
-          Highcharts.numberFormat(dif, 0) +
-          ")</span>";
-      }
-      if (dif > 0) {
-        r +=
-          '<span style="color:#00bb00;font-weight:bold;"> (+' +
-          Highcharts.numberFormat(dif, 0) +
-          ")</span>";
+          // @ts-ignore
+          Highcharts.numberFormat(this.y, 0);
+        if (dif < 0) {
+          r +=
+            '<span style="color:#ff0000;font-weight:bold;"> (' +
+            Highcharts.numberFormat(dif, 0) +
+            ")</span>";
+        } else if (dif > 0) {
+          r +=
+            '<span style="color:#00bb00;font-weight:bold;"> (+' +
+            Highcharts.numberFormat(dif, 0) +
+            ")</span>";
+        }
       }
       return r;
+    },
+  },
+  plotOptions: {
+    series: {
+      threshold: null,
+    },
+    area: {
+      fillOpacity: 0.25,
     },
   },
   series: [
     {
       showInLegend: false,
       name,
+      data: options?.data,
       marker: { enabled: false },
       color: colors.yellow[300],
       lineWidth: 3,
-      type: "line",
+      type: options?.data ? "area" : "line",
     },
   ],
 });

@@ -50,6 +50,11 @@ export interface User {
   fails: number;
 }
 
+export interface Datapoint {
+  time: number;
+  count: number;
+}
+
 export const userSorts = ["counts", "fails", "cf_ratio"] as const;
 export type UserSort = (typeof userSorts)[number];
 
@@ -104,5 +109,10 @@ export const getServerUsers = async (
   if (options?.page) params.set("page", options.page.toString());
 
   const res = await fetchFromAPI(`/servers/${id}/users?${params}`);
+  return await res.json();
+};
+
+export const getServerHistory = async (id: string): Promise<Datapoint[]> => {
+  const res = await fetchFromAPI(`/servers/${id}/history`);
   return await res.json();
 };
