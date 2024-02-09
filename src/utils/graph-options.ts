@@ -5,7 +5,6 @@ export const graphOptions = (
   name: string,
   options?: {
     data?: [number, number][];
-    title?: string;
     gains?: true;
   },
 ): Options => ({
@@ -17,7 +16,7 @@ export const graphOptions = (
     animation: false,
   },
   title: {
-    text: options?.title,
+    text: "",
   },
   xAxis: {
     type: "datetime",
@@ -127,7 +126,7 @@ export const graphOptions = (
     {
       showInLegend: false,
       name,
-      data: options?.data,
+      data: options?.data ?? [],
       marker: { enabled: false },
       color: colors.yellow[300],
       lineWidth: 3,
