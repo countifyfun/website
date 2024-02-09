@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Odometer from "react-odometerjs";
+import { List, LineChart } from "lucide-react";
 
 export default function Counts({ server }: { server: Server }) {
   const chartRef = useRef<HighchartsReact.RefObject>(null);
@@ -58,12 +59,25 @@ export default function Counts({ server }: { server: Server }) {
           className="mt-1 w-full text-center font-roboto text-5xl !leading-[1.1em] sm:text-6xl md:text-7xl"
         />
       </div>
-      <Link
-        href={`/servers/${server.id}/leaderboard`}
-        className="rounded-lg bg-neutral-900 p-4 text-center transition-all hover:text-yellow-300 hover:opacity-75"
-      >
-        View Leaderboard
-      </Link>
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        <Link
+          href={`/servers/${server.id}/leaderboard`}
+          className="flex items-center justify-center gap-2 rounded-lg bg-neutral-900 p-4 text-center transition-all hover:bg-neutral-800"
+        >
+          <List className="h-5 w-5" />
+          Leaderboard
+        </Link>
+        <Link
+          href={`/servers/${server.id}/analytics`}
+          className="flex items-center justify-center gap-2 rounded-lg bg-neutral-900 p-4 text-center transition-all hover:bg-neutral-800"
+        >
+          <LineChart className="h-5 w-5" />
+          Analytics
+          <span className="rounded-full bg-yellow-300 px-2 py-0.5 text-xs text-black">
+            New!
+          </span>
+        </Link>
+      </div>
       <div className="rounded-lg bg-neutral-900 p-4 py-8">
         <HighchartsReact
           highcharts={Highcharts}
