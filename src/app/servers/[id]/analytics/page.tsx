@@ -101,7 +101,7 @@ export default async function Analytics({
               </tr>
             </thead>
             <tbody>
-              {updates.slice(0, 24).map((d, index) => (
+              {updates.slice(Math.max(updates.length - 24, 0)).map((d, index) => (
                 <tr key={index}>
                   <td className="border border-neutral-800 px-4 py-2">
                     {dayjs(d.time).format("YYYY-MM-DD hh:mm:ss A")}
