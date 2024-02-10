@@ -1,7 +1,11 @@
-import { Plus } from "lucide-react";
+import { ArrowRight, Plus } from "lucide-react";
 import SignInButton from "./login-button";
+import { getServerAuthSession } from "@/utils/auth";
+import Link from "next/link";
 
-export default function Landing() {
+export default async function Landing() {
+  const session = await getServerAuthSession();
+
   return (
     <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-[90rem] flex-col p-6">
       <div className="flex grow flex-col gap-4 md:flex-row">
@@ -27,7 +31,16 @@ export default function Landing() {
               <Plus className="h-5 w-5" />
               Add Countify
             </a>
-            <SignInButton />
+            {session ? (
+              <Link
+                href="/dashboard"
+                className="flex items-center gap-1 py-1 pl-2 text-sm font-medium transition-all hover:text-yellow-300 hover:underline hover:underline-offset-2"
+              >
+                Go to dashboard <ArrowRight className="h-5 w-5" />
+              </Link>
+            ) : (
+              <SignInButton />
+            )}
           </div>
         </div>
         <div className="flex grow flex-col items-center justify-center text-center perspective-250">
